@@ -1,4 +1,6 @@
 """Simulated Coffee Machine using OOP"""
+
+
 Requirements Description:
 1. asking “​What would you like? (espresso/latte/cappuccino):”​
 2. Turn off the Coffee Machine by entering “​off”​to the prompt.
