@@ -1,4 +1,7 @@
+import base64
 import tkinter
+import os
+from tomato_png import img as tomato_pic
 # ---------------------------- CONSTANTS ------------------------------- #
 PINK = "#e2979c"
 RED = "#e7305b"
@@ -11,6 +14,12 @@ LONG_BREAK_MIN = 20
 MINUTES = 60
 timer = None
 mode = 0
+
+# ---------------------------- ADD PICTURE TO EXECUTABLE FILE------------------------------- #
+tomato = open('tomato_tmp.png', 'wb')
+tomato.write(base64.b64decode(tomato_pic))
+tomato.close()
+
 
 # ---------------------------- TIMER RESET ------------------------------- # 
 # 25 5 25 5 25 5
@@ -30,6 +39,7 @@ def start_pomodoro():
         timer_title.config(text="Work Time", fg=GREEN)
     count_down(count)
 
+
 def reset_pomodoro():
     window.after_cancel(timer)
     timer_title.config(text="Timer", fg=GREEN)
@@ -37,6 +47,7 @@ def reset_pomodoro():
     checkmark.config(text="")
     global mode
     mode = 0
+
 
 # ---------------------------- COUNTDOWN MECHANISM ------------------------------- #
 def count_down(count):
@@ -53,15 +64,17 @@ def count_down(count):
         checkmark.config(text=text)
 
 
-
 # ---------------------------- UI SETUP ------------------------------- #
+
+
 window = tkinter.Tk()
 window.title("Pomodoro")
 window.config(padx=100, pady=50, bg=YELLOW)
 
 
 canvas = tkinter.Canvas(width=210, height=230, bg=YELLOW, highlightthickness=0)
-tomato_image = tkinter.PhotoImage(file="tomato.png")
+tomato_image = tkinter.PhotoImage(file="tomato_tmp.png")
+# You can change "tomato_tmp.png" back into "tomato.png" when using python.
 canvas.create_image(106, 113, image=tomato_image)
 
 counter_text = canvas.create_text(106, 130, text="00:00", fill="white", font=(FONT_NAME, 35, "bold"))
@@ -81,3 +94,5 @@ checkmark = tkinter.Label(text="", fg=GREEN, bg=YELLOW)
 checkmark.grid(column=1, row=3)
 
 window.mainloop()
+
+os.remove('tomato_tmp.png')

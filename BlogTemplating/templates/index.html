@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway" rel="stylesheet">
+    <link rel="stylesheet" href="../static/css/styles.css">
+</head>
+<body>
+<div class="wrapper">
+    <div class="top">
+        <div class="title"><h1>Weekly News About Technology</h1></div>
+    </div>
+    {% for item in content %}
+     <div class="content">
+        <div class="card">
+            <h2>{{ item['title'] }}</h2>
+            <p class="text">{{ item['author'] }}</p>
+            <a  href="{{url_for('get_blog',num=loop.index0)}}">Read On Internal Link</a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href={{item['url']}}>Go To External Link</a>
+            <p>{{ item['description'] }}</p>
+        </div>
+    </div>
+    {% endfor %}
+
+</div>
+</body>
+<footer>
+    <p>Made with Sandy♥️.</p>
+</footer>
+</html>
